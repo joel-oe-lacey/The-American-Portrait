@@ -1,0 +1,58 @@
+.carousel {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-disp {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-timeline {
+    height: 20%;
+    width: 100%;
+
+    //might want to grid this for a more even display
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-areas:
+    ". left . prevTime currTime currTime nextTime . right .";
+    align-items: center;
+    text-align: center;
+}
+
+.carousel-img {
+    height: 80%;
+    width: 40%;
+    object-fit: contain;
+}
+
+.timeline-prev {
+    grid-area: prevTime;
+    border-bottom: 1px solid black;
+}
+
+.timeline-next {
+    grid-area: nextTime;
+    border-bottom: 1px solid black;
+}
+
+.timeline-curr {
+    grid-area: currTime;
+    border: 1px solid black;
+}
+
+.carousel-arrow-left {
+    grid-area: left;
+}
+
+.carousel-arrow-right {
+    grid-area: right;
+}

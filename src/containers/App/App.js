@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.scss';
 import { apiCall } from '../../utils/fetchCalls';
 import Piece from '../../components/Piece/Piece';
+import Carousel from '../../components/Carousel/Carousel';
+
 
 class App extends Component {
   constructor() {
@@ -77,7 +79,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.test && <Piece {...this.state.works} />}
+        <Carousel />
+        {/* {this.state.test && <Piece {...this.state.works} />} */}
       </div>
     );
   }

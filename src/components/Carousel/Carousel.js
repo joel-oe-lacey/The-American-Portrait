@@ -5,6 +5,8 @@ import './Carousel.scss';
 //pieces array come in as props
 //deconstruct to display certain info 
 
+//link to art piece on 
+
 export default class Carousel extends Component {
     constructor(props) {
         super(props)
@@ -13,7 +15,11 @@ export default class Carousel extends Component {
         }
     }
 
-    changePiece = direction => {
+    componentDidMount() {
+        
+    }
+
+    changePiece = (direction) => {
         let { prevIndex } = this.state;
         let newIndex;
 

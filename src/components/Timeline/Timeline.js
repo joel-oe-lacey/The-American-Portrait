@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Timeline.scss';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 //conditionally render forward or back based on length 
 //pieces array come in as props
@@ -45,7 +46,11 @@ export class Timeline extends Component {
         return (
         <section className="carousel">
             <section className="carousel-disp">
-                <img className='carousel-img' src={collection[i].primaryimageurl} alt="roman emperor trajan" />
+                <Link to={`piece/${collection[i].objectid}`} className='carousel-link' >
+                    <img className='carousel-img' 
+                    src={collection[i].primaryimageurl} 
+                    alt={collection[i].description}  />
+                </Link>
             </section>
             <section className="carousel-timeline">
                 <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>

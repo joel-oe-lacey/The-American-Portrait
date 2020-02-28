@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './App.scss';
 import { apiCall } from '../../utils/fetchCalls';
 import Piece from '../../components/Piece/Piece';
+import Loading from '../../components/Loading/Loading';
 import Timeline from '../../components/Timeline/Timeline';
 import { loadRegions } from '../../actions';
 import { connect } from 'react-redux';
 import { restructureArtPiece } from '../../utils/helpers';
 import { loadCollection } from '../../actions';
+import { Route, Switch } from 'react-router-dom';
 
 export class App extends Component {
   constructor() {
@@ -17,7 +19,7 @@ export class App extends Component {
   }
 
   retrieveCollection = async () => {
-    const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&place=2029730&classification=26|60|21|30|62|155')
+    const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&q=contextualtextcount:1&hasimage=1')
 
     const rawCollectionResp = await collection.json();
 
@@ -40,10 +42,20 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.collection.length && <Timeline collection={this.state.collection}/>}
-        {/* <Carousel /> */}
-        {/* {this.state.test && <Piece {...this.state.works} />} */}
-        {/* import Piece and pull art piece out of store using ID */}
+        {!this.state.collection.length && <Loading />}
+        <Route exact path="/" render={() => {
+          return (
+              this.state.collection.length && <Timeline collection={this.state.collection} />
+        )}} />
+        <Route exact path='/piece/:id' render={({ match }) => {
+          const artPiece = this.state.collection.find(piece => piece.objectid === parseInt(match.params.id))
+          return (
+            <section className="App">
+              {!this.state.collection.length && <Loading />}
+              {this.state.collection.length && <Piece {...artPiece} />}
+            </section>
+          )
+        }} />
       </div>
     );
   }

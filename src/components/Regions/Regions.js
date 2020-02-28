@@ -3,7 +3,7 @@ import './Regions.scss';
 
 const Regions = () => {
     return (
-        <section key={objectid} className="piece-cont">
+        <section className="piece-cont">
         </section>
     )
 }

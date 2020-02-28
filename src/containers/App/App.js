@@ -16,62 +16,8 @@ export class App extends Component {
     }
   }
 
-  retrieveArtPiece = async () => {
-    const piece = await apiCall('https://api.harvardartmuseums.org/object/303389?apikey=b59b0050-58c4-11ea-b831-f76084e9f972')
-
-    const {
-      title,
-      titles,
-      objectid,
-      description,
-      provenance,
-      commentary,
-      labeltext,
-      classification,
-      creditline,
-      century,
-      culture,
-      medium,
-      videos,
-      datebegin,
-      dateend,
-      dated,
-      period,
-      technique,
-      colors,
-      primaryimageurl,
-      images,
-    } = await piece.json();
-
-    const restrPiece = {
-      title,
-      titles,
-      objectid,
-      description,
-      provenance,
-      commentary,
-      labeltext,
-      classification,
-      creditline,
-      century,
-      culture,
-      medium,
-      videos,
-      datebegin,
-      dateend,
-      dated,
-      period,
-      technique,
-      colors,
-      primaryimageurl,
-      images
-    }
-
-    return restrPiece
-  }
-
   retrieveCollection = async () => {
-    const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&place=2029730&q=classificationid:30&size=30')
+    const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&place=2029730&classification=26|60|21|30|62|155')
 
     const rawCollectionResp = await collection.json();
 

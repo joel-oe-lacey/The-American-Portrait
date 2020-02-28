@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './Carousel.scss';
+import './Timeline.scss';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 //conditionally render forward or back based on length 
 //pieces array come in as props
@@ -7,26 +9,31 @@ import './Carousel.scss';
 
 //link to art piece on 
 
-export default class Carousel extends Component {
-    constructor(props) {
-        super(props)
+export class Timeline extends Component {
+    constructor({ collection }) {
+        super()
         this.state = {
+            collection,
             i: 0,
         }
     }
 
     componentDidMount() {
-        
+        //fetch
+        //run through helper
+        //add to store
+        //add to local storage 
     }
 
     changePiece = (direction) => {
-        let { prevIndex } = this.state;
+        let { i, collection } = this.state;
+        let endIndex = collection.length - 1;
         let newIndex;
 
         if (direction === 'left') {
-            newIndex = prevIndex - 1;
+            newIndex = i ? i - 1 : 0;
         } else {
-            newIndex = prevIndex + 1;
+            newIndex = ((i === endIndex) ? i : i + 1);
         }
 
         this.setState({
@@ -35,10 +42,15 @@ export default class Carousel extends Component {
     }
 
     render() {
-        // {image, } = this.props.pieces[this.state.i];
-        return (<section className="carousel">
+        const { collection, i } = this.state;
+        return (
+        <section className="carousel">
             <section className="carousel-disp">
-                <img className='carousel-img' src="https://nrs.harvard.edu/urn-3:HUAM:756712" alt="roman emperor trajan" />
+                <Link to={`piece/${collection[i].objectid}`} className='carousel-link' >
+                    <img className='carousel-img' 
+                    src={collection[i].primaryimageurl} 
+                    alt={collection[i].description}  />
+                </Link>
             </section>
             <section className="carousel-timeline">
                 <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>
@@ -50,3 +62,9 @@ export default class Carousel extends Component {
         </section>
     )}
 }
+
+export const mapStateToProps = state => ({
+    regions: state.regions,
+});
+
+export default connect(mapStateToProps)(Timeline)

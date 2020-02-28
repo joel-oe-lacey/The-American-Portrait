@@ -2,88 +2,70 @@ import React, { Component } from 'react';
 import './App.scss';
 import { apiCall } from '../../utils/fetchCalls';
 import Piece from '../../components/Piece/Piece';
-import Carousel from '../../components/Carousel/Carousel';
+import Loading from '../../components/Loading/Loading';
+import Timeline from '../../components/Timeline/Timeline';
+import { loadRegions } from '../../actions';
+import { connect } from 'react-redux';
+import { restructureArtPiece } from '../../utils/helpers';
+import { loadCollection } from '../../actions';
+import { Route, Switch } from 'react-router-dom';
 
-
-class App extends Component {
+export class App extends Component {
   constructor() {
     super();
     this.state = {
-      works: {},
-      test: false
+      collection: []
     }
   }
 
-  retrieveArtPiece = async () => {
-    const piece = await apiCall('https://api.harvardartmuseums.org/object/303389?apikey=b59b0050-58c4-11ea-b831-f76084e9f972')
-    const {
-      title,
-      titles,
-      objectid,
-      description,
-      provenance,
-      commentary,
-      labeltext,
-      classification,
-      creditline,
-      century,
-      culture,
-      medium,
-      videos,
-      datebegin,
-      dateend,
-      dated,
-      period,
-      technique,
-      colors,
-      primaryimageurl,
-      images,
-    } = await piece.json();
+  retrieveCollection = async () => {
+    const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&q=contextualtextcount:1&hasimage=1')
 
-    const restrPiece = {
-      title,
-      titles,
-      objectid,
-      description,
-      provenance,
-      commentary,
-      labeltext,
-      classification,
-      creditline,
-      century,
-      culture,
-      medium,
-      videos,
-      datebegin,
-      dateend,
-      dated,
-      period,
-      technique,
-      colors,
-      primaryimageurl,
-      images
-    }
+    const rawCollectionResp = await collection.json();
 
-    return restrPiece
+    const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
+      restrCollection.push(restructureArtPiece(item))
+      return restrCollection;
+    }, [])
+
+    return structuredCollectionData;
   }
 
   componentDidMount() {
-    //take object from data fetch, check it's returning, then try restructure through destr. 
-    //to new obj for store assignment 
-    this.retrieveArtPiece()
-    .then(piece => {
-      this.setState({works: piece, test: true})
-    })
+    this.retrieveCollection()
+      .then(collectionData => {
+        this.setState({ collection: collectionData })
+        this.props.loadCollectionToStore(collectionData)
+      })
   }
 
   render() {
     return (
       <div className="App">
-        <Carousel />
-        {/* {this.state.test && <Piece {...this.state.works} />} */}
+        {!this.state.collection.length && <Loading />}
+        <Route exact path="/" render={() => {
+          return (
+              this.state.collection.length && <Timeline collection={this.state.collection} />
+        )}} />
+        <Route exact path='/piece/:id' render={({ match }) => {
+          const artPiece = this.state.collection.find(piece => piece.objectid === parseInt(match.params.id))
+          return (
+            <section className="App">
+              {!this.state.collection.length && <Loading />}
+              {this.state.collection.length && <Piece {...artPiece} />}
+            </section>
+          )
+        }} />
       </div>
     );
   }
 }
 
-export default App;
+export const mapDispatchToProps = dispatch => ({
+  loadRegionsToStore: (regions) => { dispatch(loadRegions(regions)) },
+  loadCollectionToStore: (collection) => { dispatch(loadCollection(collection)) }
+});
+
+export default connect(null, mapDispatchToProps)(App)
+
+

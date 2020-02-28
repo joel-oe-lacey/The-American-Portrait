@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 export class Timeline extends Component {
     constructor({ collection }) {
-        super({ collection })
+        super()
         this.state = {
             collection,
             i: 0,
@@ -26,7 +26,7 @@ export class Timeline extends Component {
 
     changePiece = (direction) => {
         let { i, collection } = this.state;
-        let endIndex = collection.length;
+        let endIndex = collection.length - 1;
         let newIndex;
 
         if (direction === 'left') {
@@ -42,7 +42,6 @@ export class Timeline extends Component {
 
     render() {
         const { collection, i } = this.state;
-
         return (
         <section className="carousel">
             <section className="carousel-disp">

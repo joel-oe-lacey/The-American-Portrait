@@ -43,6 +43,9 @@ export class Timeline extends Component {
 
     render() {
         const { collection, i } = this.state;
+        let endIndex = collection.length - 1;
+        //abstract index checking into another function to reduce redundancy 
+
         return (
         <section className="carousel">
             <section className="carousel-disp">
@@ -54,9 +57,9 @@ export class Timeline extends Component {
             </section>
             <section className="carousel-timeline">
                 <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>
-                <h2 className="timeline-prev">Prev Date</h2>
-                <h1 className="timeline-curr">Curr Date</h1>
-                <h2 className="timeline-next">Next Date</h2>
+                    <h2 className="timeline-prev">{i ? collection[i-1].dateend : collection[i].dateend}</h2>
+        <h1 className="timeline-curr">{collection[i].dateend}</h1>
+                    <h2 className="timeline-next">{i === endIndex ? collection[i].dateend : collection[i + 1].dateend}</h2>
                 <button className='carousel-arrow-right' onClick={() => this.changePiece('right')}>→</button>
             </section>
         </section>

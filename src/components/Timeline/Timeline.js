@@ -9,25 +9,30 @@ import { connect } from 'react-redux';
 //link to art piece on 
 
 export class Timeline extends Component {
-    constructor(props) {
-        super(props)
+    constructor({ collection }) {
+        super({ collection })
         this.state = {
+            collection,
             i: 0,
         }
     }
 
     componentDidMount() {
-        
+        //fetch
+        //run through helper
+        //add to store
+        //add to local storage 
     }
 
     changePiece = (direction) => {
-        let { prevIndex } = this.state;
+        let { i, collection } = this.state;
+        let endIndex = collection.length;
         let newIndex;
 
         if (direction === 'left') {
-            newIndex = prevIndex - 1;
+            newIndex = i ? i - 1 : 0;
         } else {
-            newIndex = prevIndex + 1;
+            newIndex = ((i === endIndex) ? i : i + 1);
         }
 
         this.setState({
@@ -36,10 +41,12 @@ export class Timeline extends Component {
     }
 
     render() {
-        // {image, } = this.props.pieces[this.state.i];
-        return (<section className="carousel">
+        const { collection, i } = this.state;
+
+        return (
+        <section className="carousel">
             <section className="carousel-disp">
-                <img className='carousel-img' src="https://nrs.harvard.edu/urn-3:HUAM:756712" alt="roman emperor trajan" />
+                <img className='carousel-img' src={collection[i].primaryimageurl} alt="roman emperor trajan" />
             </section>
             <section className="carousel-timeline">
                 <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>

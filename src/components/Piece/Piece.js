@@ -26,7 +26,7 @@ const Piece = ({
                     <h3>{century}</h3>
                 </header>
                 <main className="desc-main">
-                    <p>{labeltext}</p>
+                    <p>{labeltext ? labeltext : description}</p>
                 </main>
                 <footer className="desc-footer">
                     <h4>{`Dated: ${dated}`}</h4>

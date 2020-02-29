@@ -52,19 +52,20 @@ export class App extends Component {
   }
 
   render() {
+    const collection = this.props.collections;
     return (
       <div className="App">
-        {!this.props.collections.length && <Loading />}
+        {!collection.length && <Loading />}
         <Route exact path="/" render={() => {
           return (
-            this.props.collections.length && <Timeline />
+            collection.length && <Timeline />
         )}} />
         <Route exact path='/piece/:id' render={({ match }) => {
-          const artPiece = this.props.collections.collection.find(piece => piece.objectid === parseInt(match.params.id))
+          const artPiece = collection.find(piece => piece.objectid === parseInt(match.params.id))
           return (
             <section className="App">
-              {!this.props.collections.collection.length && <Loading />}
-              {this.props.collections.collection.length && <Piece {...artPiece} />}
+              {!collection.length && <Loading />}
+              {collection.length && <Piece {...artPiece} />}
             </section>
           )
         }} />

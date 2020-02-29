@@ -18,13 +18,6 @@ export class Timeline extends Component {
         }
     }
 
-    componentDidMount() {
-        //fetch
-        //run through helper
-        //add to store
-        //add to local storage 
-    }
-
     changePiece = (direction) => {
         let { i, collection } = this.state;
         let endIndex = collection.length - 1;
@@ -42,7 +35,8 @@ export class Timeline extends Component {
     }
 
     render() {
-        const { collection, i } = this.state;
+        const { i } = this.state;
+        const { collection } = this.props;
         let endIndex = collection.length - 1;
         //abstract index checking into another function to reduce redundancy 
 
@@ -55,6 +49,7 @@ export class Timeline extends Component {
                     alt={collection[i].description}  />
                 </Link>
             </section>
+            <h1 className="carousel-title">{collection[i].title}</h1>
             <section className="carousel-timeline">
                 <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>
                     <h2 className="timeline-prev">{i ? collection[i-1].dateend : collection[i].dateend}</h2>
@@ -67,7 +62,7 @@ export class Timeline extends Component {
 }
 
 export const mapStateToProps = state => ({
-    regions: state.regions,
+    collection: state.collections,
 });
 
 export default connect(mapStateToProps)(Timeline)

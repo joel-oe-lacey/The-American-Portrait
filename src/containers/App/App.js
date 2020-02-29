@@ -12,39 +12,41 @@ import { Route, Switch } from 'react-router-dom';
 
 export class App extends Component {
   retrieveInitialCollection = async () => {
+    //impliment base query here, future queries will build dynamically
     const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&hasimage=1&place=2028429&classification=17&culture=American&size=100&sort=dateend&sortorder=desc')
-
     const rawCollectionResp = await collection.json();
-
     const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
       restrCollection.push(restructureArtPiece(item))
       return restrCollection;
     }, [])
-
     this.props.loadCollectionToStore(structuredCollectionData)
-    // console.log('firstCollResp', rawCollectionResp.info.pages > 1)
     if (rawCollectionResp.info.pages > 1) {
       this.retrieveSubseqCollections(rawCollectionResp)
+    } else {
+      const bucketedCollection = bucketArtByDate(structuredCollectionData);
+      this.props.loadCollectionToStore(bucketedCollection);
     }
   }
 
   retrieveSubseqCollections = async (prevCollection) => {
     const collection = await apiCall(`${prevCollection.info.next}`)
-
     const rawCollectionResp = await collection.json();
-
     const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
       restrCollection.push(restructureArtPiece(item))
       return restrCollection;
     }, []);
-
     this.props.loadSubsqCollectionToStore(structuredCollectionData);
     if (rawCollectionResp.info.page !== rawCollectionResp.info.pages) {
       this.retrieveSubseqCollections(rawCollectionResp)
+    } else {
+      const finalCollection = this.props.collections;
+      const bucketedCollection = bucketArtByDate(finalCollection);
+      this.props.loadCollectionToStore(bucketedCollection);
     }
   }
 
-
+  //need to run through bucketing after collection has fired off
+  //but need to account for async completion 
   componentDidMount() {
     this.retrieveInitialCollection()
   }
@@ -55,7 +57,7 @@ export class App extends Component {
         {!this.props.collections.length && <Loading />}
         <Route exact path="/" render={() => {
           return (
-            this.props.collections.length && <Timeline collection={this.props.collections} />
+            this.props.collections.length && <Timeline />
         )}} />
         <Route exact path='/piece/:id' render={({ match }) => {
           const artPiece = this.props.collections.collection.find(piece => piece.objectid === parseInt(match.params.id))

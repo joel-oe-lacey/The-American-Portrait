@@ -22,8 +22,24 @@
     grid-template-rows: 100%;
 }
 
+.carousel-position {
+    height: 5%;
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.position-inactive {
+    font-size: 1em;
+}
+
+.position-active {
+    font-size: 1.5em;
+}
+
 .carousel-timeline {
-    height: 15%;
+    height: 10%;
     width: 100%;
 
     //might want to grid this for a more even display
@@ -70,12 +86,10 @@
 
 .timeline-prev {
     grid-area: prevTime;
-    border-bottom: 1px solid white;
 }
 
 .timeline-next {
     grid-area: nextTime;
-    border-bottom: 1px solid white;
 }
 
 .timeline-curr {

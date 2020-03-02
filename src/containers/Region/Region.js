@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { apiCall } from '../../utils/fetchCalls';
 import { connect } from 'react-redux';
-import { restructureArtPiece, bucketArtByDate, recompileCollection, checkRecordDataAvailability } from '../../utils/helpers';
+import { bucketArtByDate, recompileCollection, checkRecordDataAvailability } from '../../utils/helpers';
 import { loadCollection, loadSubsqCollection } from '../../actions';
 import Loading from '../../components/Loading/Loading';
 import { Redirect } from 'react-router-dom';

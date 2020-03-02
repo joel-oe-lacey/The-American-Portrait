@@ -24,20 +24,27 @@ export class About extends Component {
             )
         })
 
+        const introDisplay = introText.map(paragraph => <p>{`${paragraph}`}</p>)
+
         return (
             <section className="introduction">
                 <section className="intro-center">
                     <h1>
                         The American Portrait
                     </h1>
-                    <article>
-                        {introText}
+                    <article className="intro-text">
+                        {introDisplay}
                     </article>
-                    <select name="state" onChange={this.chooseState}>
+                    <select 
+                        name="state" 
+                        onChange={this.chooseState}
+                        className="intro-selection">
+                        <option value="" disabled selected>Please choose a state.</option>
                         {stateSelectOptions}
                     </select>
                     <Link 
-                    to="/timeline"
+                        to="/region"
+                        className="intro-link"
                         onClick={() => this.props.loadRegionToStore(this.state.region)}
                     >Continue</Link>
                 </section>

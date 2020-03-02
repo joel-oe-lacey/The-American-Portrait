@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Invalid Path should match a snapshot as expected 1`] = `
+<section
+  className="error"
+>
+  <section
+    className="error-center"
+  >
+    <h1>
+      Page Not Found.
+    </h1>
+    <Link
+      to="/"
+    >
+      Home
+    </Link>
+  </section>
+</section>
+`;

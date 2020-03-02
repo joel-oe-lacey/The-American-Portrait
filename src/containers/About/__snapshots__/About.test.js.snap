@@ -13,16 +13,24 @@ exports[`About should match a snapshot as expected 1`] = `
     <article
       className="intro-text"
     >
-      <p>
+      <p
+        key="0"
+      >
         People are trapped in history, and history is trapped in them" said James Baldwin in his 1953 essay "Stranger in the Village". At the time he spoke of the indivisibility of black culture from the larger collective American ethos and culture.
       </p>
-      <p>
+      <p
+        key="1"
+      >
         A continuation of that allegory, I believe, also speaks to the importance of remaining in touch with our collective history. It, in similar duality, is a part of us all.
       </p>
-      <p>
+      <p
+        key="2"
+      >
         The American Portrait looks to reunite us with a visual piece of that history. Utilizing the Harvard Museum API, you can view a timeline of historic photos by state, ten per decade where available.
       </p>
-      <p>
+      <p
+        key="3"
+      >
         While incomplete and historically biased, these photos offer us at very least a partial window into some of the lives, events, and adolescent places that would go on to form the nation as we know it. 
       </p>
     </article>
@@ -39,256 +47,307 @@ exports[`About should match a snapshot as expected 1`] = `
         Please choose a state.
       </option>
       <option
+        key="0"
         value="Alabama"
       >
         Alabama
       </option>
       <option
+        key="1"
         value="Alaska"
       >
         Alaska
       </option>
       <option
+        key="2"
         value="Arizona"
       >
         Arizona
       </option>
       <option
+        key="3"
         value="Arkansas"
       >
         Arkansas
       </option>
       <option
+        key="4"
         value="California"
       >
         California
       </option>
       <option
+        key="5"
         value="Colorado"
       >
         Colorado
       </option>
       <option
+        key="6"
         value="Connecticut"
       >
         Connecticut
       </option>
       <option
+        key="7"
         value="Delaware"
       >
         Delaware
       </option>
       <option
+        key="8"
         value="Florida"
       >
         Florida
       </option>
       <option
+        key="9"
         value="Georgia"
       >
         Georgia
       </option>
       <option
+        key="10"
         value="Hawaii"
       >
         Hawaii
       </option>
       <option
+        key="11"
         value="Idaho"
       >
         Idaho
       </option>
       <option
+        key="12"
         value="Illinois"
       >
         Illinois
       </option>
       <option
+        key="13"
         value="Indiana"
       >
         Indiana
       </option>
       <option
+        key="14"
         value="Iowa"
       >
         Iowa
       </option>
       <option
+        key="15"
         value="Kansas"
       >
         Kansas
       </option>
       <option
+        key="16"
         value="Kentucky"
       >
         Kentucky
       </option>
       <option
+        key="17"
         value="Louisiana"
       >
         Louisiana
       </option>
       <option
+        key="18"
         value="Maine"
       >
         Maine
       </option>
       <option
+        key="19"
         value="Maryland"
       >
         Maryland
       </option>
       <option
+        key="20"
         value="Massachusetts"
       >
         Massachusetts
       </option>
       <option
+        key="21"
         value="Michigan"
       >
         Michigan
       </option>
       <option
+        key="22"
         value="Minnesota"
       >
         Minnesota
       </option>
       <option
+        key="23"
         value="Mississippi"
       >
         Mississippi
       </option>
       <option
+        key="24"
         value="Missouri"
       >
         Missouri
       </option>
       <option
+        key="25"
         value="Montana"
       >
         Montana
       </option>
       <option
+        key="26"
         value="Nebraska"
       >
         Nebraska
       </option>
       <option
+        key="27"
         value="Nevada"
       >
         Nevada
       </option>
       <option
+        key="28"
         value="New Hampshire"
       >
         New Hampshire
       </option>
       <option
+        key="29"
         value="New Jersey"
       >
         New Jersey
       </option>
       <option
+        key="30"
         value="New Mexico"
       >
         New Mexico
       </option>
       <option
+        key="31"
         value="New York"
       >
         New York
       </option>
       <option
+        key="32"
         value="North Carolina"
       >
         North Carolina
       </option>
       <option
+        key="33"
         value="North Dakota"
       >
         North Dakota
       </option>
       <option
+        key="34"
         value="Ohio"
       >
         Ohio
       </option>
       <option
+        key="35"
         value="Oklahoma"
       >
         Oklahoma
       </option>
       <option
+        key="36"
         value="Oregon"
       >
         Oregon
       </option>
       <option
+        key="37"
         value="Pennsylvania"
       >
         Pennsylvania
       </option>
       <option
+        key="38"
         value="Puerto Rico"
       >
         Puerto Rico
       </option>
       <option
+        key="39"
         value="Rhode Island"
       >
         Rhode Island
       </option>
       <option
+        key="40"
         value="South Carolina"
       >
         South Carolina
       </option>
       <option
+        key="41"
         value="South Dakota"
       >
         South Dakota
       </option>
       <option
+        key="42"
         value="Tennessee"
       >
         Tennessee
       </option>
       <option
+        key="43"
         value="Texas"
       >
         Texas
       </option>
       <option
+        key="44"
         value="Utah"
       >
         Utah
       </option>
       <option
+        key="45"
         value="Vermont"
       >
         Vermont
       </option>
       <option
+        key="46"
         value="Virginia"
       >
         Virginia
       </option>
       <option
+        key="47"
         value="Washington"
       >
         Washington
       </option>
       <option
+        key="48"
         value="West Virginia"
       >
         West Virginia
       </option>
       <option
+        key="49"
         value="Wisconsin"
       >
         Wisconsin
       </option>
       <option
+        key="50"
         value="Wyoming"
       >
         Wyoming

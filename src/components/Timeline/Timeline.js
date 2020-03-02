@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Timeline.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import Invalid from '../../components/Invalid/Invalid';
 export class Timeline extends Component {
     constructor({ collection }) {
         super()
@@ -41,34 +41,47 @@ export class Timeline extends Component {
             return <h4 className="position-inactive">.</h4>
         })
 
-        return (
-        <section className="carousel">
-            <section className="carousel-disp">
-                    {(i !== 0) && <img className='carousel-img-prev'
-                        src={collection[i-1].primaryimageurl}
-                        alt={collection[i-1].description} />}
-                <Link to={`piece/${collection[i].objectid}`} className='carousel-link' >
-                    <img className='carousel-img' 
-                    src={collection[i].primaryimageurl} 
-                    alt={collection[i].description}  />
-                </Link>
-                    {(i !== endIndex) && <img className='carousel-img-next'
-                        src={collection[i + 1].primaryimageurl}
-                        alt={collection[i + 1].description} />}
+        if (!collection.length) {
+            return <Invalid />
+        } else {
+            return (
+            <section className="carousel">
+                <section className="carousel-disp">
+                        {(i !== 0) && <img className='carousel-img-prev'
+                            src={collection[i-1].primaryimageurl}
+                            alt={collection[i-1].description} />}
+                    <Link to={`piece/${collection[i].objectid}`} className='carousel-link' >
+                        <img className='carousel-img' 
+                        src={collection[i].primaryimageurl} 
+                        alt={collection[i].description}  />
+                    </Link>
+                        {(i !== endIndex) && <img className='carousel-img-next'
+                            src={collection[i + 1].primaryimageurl}
+                            alt={collection[i + 1].description} />}
+                </section>
+                <h1 className="carousel-title">{collection[i].title}</h1>
+                <section className="carousel-position">
+                    {positionIndicator}
+                </section>
+                <section className="carousel-timeline">
+                        {(i !== 0) && <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>Backwards</button>}
+                        {i ? <span className="timeline-prev">
+                            <h2>{collection[i-1].dateend}</h2>
+                            <h2>Previous</h2>
+                        </span> : ''}
+                        <span className="timeline-curr">
+                            <h1>{collection[i].dateend}</h1>
+                            <h2>Current</h2>
+                        </span>
+                        {i !== endIndex ?<span className="timeline-next">
+                            <h2>{collection[i + 1].dateend}</h2>
+                            <h2>Next</h2>
+                        </span> : ''}
+                        {(i !== endIndex) && <button className='carousel-arrow-right' onClick={() => this.changePiece('right')}>Forwards</button>}
+                </section>
             </section>
-            <h1 className="carousel-title">{collection[i].title}</h1>
-            <section className="carousel-position">
-                {positionIndicator}
-            </section>
-            <section className="carousel-timeline">
-                    {(i !== 0) && <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>}
-                    <h2 className="timeline-prev">{i ? collection[i-1].dateend : ''}</h2>
-        <h1 className="timeline-curr">{collection[i].dateend}</h1>
-                    <h2 className="timeline-next">{i === endIndex ? '' : collection[i + 1].dateend}</h2>
-                    {(i !== endIndex) && <button className='carousel-arrow-right' onClick={() => this.changePiece('right')}>→</button>}
-            </section>
-        </section>
-    )}
+        )}
+    }
 }
 
 export const mapStateToProps = state => ({

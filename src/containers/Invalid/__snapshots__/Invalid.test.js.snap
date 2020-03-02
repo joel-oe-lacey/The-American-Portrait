@@ -8,9 +8,13 @@ exports[`Invalid Path should match a snapshot as expected 1`] = `
     className="error-center"
   >
     <h1>
-      Page Not Found.
+      Page error, or there are no available photos.
     </h1>
+    <h2>
+      Please begin again.
+    </h2>
     <Link
+      className="home-link"
       to="/"
     >
       Home

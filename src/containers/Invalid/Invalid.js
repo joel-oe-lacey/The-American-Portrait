@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 export const Invalid = ({ collections }) => {
-    const msg = (collections.length ? 'Page Not Found.' : 'Insufficient historical record, please try another state.')
+    // const msg = (collections.length ? 'Page Not Found.' : 'Insufficient historical record, please try another state.')
 
     return (
         <section className="error">
             <section className="error-center">
                 <h1>
-                    {msg}
+                    Page error, or there are no available photos.
                 </h1>
-                <Link to="/">Home</Link>
+                <h2>
+                    Please begin again.
+                </h2>
+                <Link to="/" className="home-link">Home</Link>
             </section>
         </section>
     )

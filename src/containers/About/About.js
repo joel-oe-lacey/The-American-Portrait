@@ -37,8 +37,9 @@ export class About extends Component {
                     <select 
                         name="state" 
                         onChange={this.chooseState}
-                        className="intro-selection">
-                        <option value="" disabled selected>Please choose a state.</option>
+                        className="intro-selection"
+                        defaultValue="">
+                        <option value="" disabled>Please choose a state.</option>
                         {stateSelectOptions}
                     </select>
                     <Link 

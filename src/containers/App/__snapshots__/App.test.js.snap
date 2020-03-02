@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot 1`] = `
+<div
+  className="App"
+>
+  <Switch>
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(About)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Region)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/region"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Timeline)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/timeline"
+    />
+    <Route
+      exact={true}
+      path="/piece/:id"
+      render={[Function]}
+    />
+    <Connect(Invalid) />
+  </Switch>
+</div>
+`;

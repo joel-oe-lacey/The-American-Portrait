@@ -1,18 +1,34 @@
 import React from 'react';
-import { Region, mapDispatchToProps } from './Region';
+import { Region, mapDispatchToProps, mapStateToProps } from './Region';
+import { apiCall } from '../../utils/fetchCalls';
 import { shallow } from 'enzyme';
 import { loadCollection, loadSubsqCollection } from '../../actions';
-import { mockCollectionPrimary } from '../../utils/referenceData';
+import { mockCollectionPrimary, mockCollectionSecondary } from '../../utils/referenceData';
 
+jest.mock('../../utils/fetchCalls.js')
 
 describe('Region', () => {
-    it('should match a snapshot as expected', () => {
-        const wrapper = shallow(<Region />)
+    let wrapper, instance;
 
+    beforeEach(() => {
+        wrapper = shallow(<Region />);
+        instance = wrapper.instance();
+    });
+
+    it('should match a snapshot as expected', () => {
         expect(wrapper).toMatchSnapshot()
     })
 
-    it('should fetch all art on mount', async () => {
+    it('should fetch a region on mount', async () => {
+        apiCall.mockImplementation(() => {
+            return Promise.resolve({records: [{id: 1}]})
+        })
+        const expected = 1;
+        const region = instance.retrieveRegionCode();
+
+        expect(region).toEqual(expected);
+        //returns promise object to be handled
+
         // Setup
         //check component mount, 
         //import mock data from separate file 
@@ -42,6 +58,22 @@ describe('Region', () => {
             mappedProps.loadSubsqCollectionToStore(collection)
 
             expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+        })
+    })
+
+    describe('mapStateToProps', () => {
+        it('should return an array of collection objects as a prop', () => {
+            const mockState = {
+                region: 'Colorado',
+                collections: [mockCollectionPrimary, mockCollectionSecondary],
+                testProp: false
+            }
+            const expected = {
+                region: 'Colorado',
+                collections: [mockCollectionPrimary, mockCollectionSecondary]
+            }
+            const mappedProps = mapStateToProps(mockState);
+            expect(mappedProps).toEqual(expected)
         })
     })
 })

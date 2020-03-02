@@ -3,7 +3,7 @@ import { apiCall } from '../../utils/fetchCalls';
 import { connect } from 'react-redux';
 import { restructureArtPiece, bucketArtByDate } from '../../utils/helpers';
 import { loadCollection, loadSubsqCollection } from '../../actions';
-import Loading from '../Loading/Loading';
+import Loading from '../../components/Loading/Loading';
 import { Redirect } from 'react-router-dom';
 
 export class Region extends Component {

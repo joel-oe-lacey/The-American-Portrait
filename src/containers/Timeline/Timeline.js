@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Timeline.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Invalid from '../../components/Invalid/Invalid';
+import Invalid from '../Invalid/Invalid';
 export class Timeline extends Component {
     constructor({ collection }) {
         super()

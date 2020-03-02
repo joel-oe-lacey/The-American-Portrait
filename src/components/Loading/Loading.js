@@ -1,5 +1,6 @@
 import React from 'react';
 import './Loading.scss';
+import { Link } from 'react-router-dom';
 
 const Loading = () => {
     return (
@@ -14,6 +15,7 @@ const Loading = () => {
                 <h3>
                     Loading Data...
                 </h3>
+                <Link to="/">Return Home</Link>
             </section>
         </section>
     )

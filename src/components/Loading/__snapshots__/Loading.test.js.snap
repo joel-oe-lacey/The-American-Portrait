@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading should match a snapshot as expected 1`] = `
+<section
+  className="alert"
+>
+  <section
+    className="alert-center"
+  >
+    <h1>
+      "The land flourished because it was fed from so many sources--because it was nourished by so many cultures and traditions and peoples."
+    </h1>
+    <h2>
+      Lyndon B. Johnson
+    </h2>
+    <h3>
+      Loading Data...
+    </h3>
+    <Link
+      to="/"
+    >
+      Return Home
+    </Link>
+  </section>
+</section>
+`;

@@ -25,7 +25,6 @@ export class About extends Component {
         })
 
         const introDisplay = introText.map(paragraph => <p>{`${paragraph}`}</p>)
-
         return (
             <section className="introduction">
                 <section className="intro-center">

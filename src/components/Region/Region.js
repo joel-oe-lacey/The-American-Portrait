@@ -17,7 +17,7 @@ export class Region extends Component {
     retrieveInitialCollection = async () => {
         const region = await apiCall(`https://api.harvardartmuseums.org/place?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&size=100&q=name:${this.props.region}`)
         const regionResp = await region.json();
-        const regionID = regionResp.records ? 0 : regionResp.records[0].id;
+        const regionID = regionResp.records.length ? regionResp.records[0].id : 0;
         const collection = await apiCall(`https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&hasimage=1&place=${regionID}&classification=17&culture=American&size=100&sort=dateend&sortorder=desc`)
         const rawCollectionResp = await collection.json();
         const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
@@ -61,8 +61,7 @@ export class Region extends Component {
     }
 
     render() {
-        const { fetchComplete} = this.state;
-
+        const { fetchComplete } = this.state;
         if (fetchComplete) {
             return <Redirect to="/timeline" />
         } else {

@@ -1,36 +1,37 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Timeline } from './Timeline';
-
+import { mockCollectionPrimary, mockCollectionSecondary } from '../../utils/referenceData';
 //test map state to props 
 //test indexing functionality 
 //different snapshot for each conditional render? 
 
 describe('Timeline', () => {
-    let wrapper;
+    let wrapper, instance;
 
     beforeEach(() => {
-    wrapper = shallow(<Timeline />);
+        wrapper = shallow(<Timeline collection={[mockCollectionPrimary, mockCollectionSecondary]} />);
+        instance = wrapper.instance();
     });
 
     it('Should equal snapshot', () => {
-        const wrapper = shallow(<Timeline />);
         expect(wrapper).toMatchSnapshot();
     });
 
     it('Should subtract index for left click', () => {
-        wrapper.instance().setState({i: 10, collection: [1,2,3,4,5]})
 
-        wrapper.instance().changePiece('left');
+        instance.setState({ i: 1, collection: [mockCollectionPrimary, mockCollectionSecondary]})
 
-        expect(wrapper.state('i')).toEqual(9);
+        instance.changePiece('left');
+
+        expect(wrapper.state('i')).toEqual(0);
     });
 
     it('Should add to image index for right click', () => {
-        wrapper.instance().setState({ i: 10, collection: [1, 2, 3, 4, 5] })
+        instance.setState({ i: 0, collection: [mockCollectionPrimary, mockCollectionSecondary] })
 
-        wrapper.instance().changePiece('right');
+        instance.changePiece('right');
 
-        expect(wrapper.state('i')).toEqual(11);
+        expect(wrapper.state('i')).toEqual(1);
     });
 });

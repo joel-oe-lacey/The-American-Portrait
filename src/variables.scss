@@ -1,0 +1,14 @@
+@mixin roundedBorder($radiusAmt) {
+    border-bottom-right-radius: 5% $radiusAmt;
+    border-top-right-radius: 5% $radiusAmt;
+    border-bottom-left-radius: 5% $radiusAmt;
+    border-top-left-radius: 5% $radiusAmt;
+}
+
+@mixin textFlex() {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+

@@ -1,27 +1,53 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import './About.scss';
 import { Link } from 'react-router-dom';
+import { introText, stateNames } from '../../utils/referenceData';
+import { loadRegion } from '../../actions';
+import { connect } from 'react-redux';
 
-const About = () => {
-    return (
-        <section className="introduction">
-            <section className="intro-center">
-                <h1>
-                    The American Portrait
-                </h1>
-                <article>
-                    "People are trapped in history, and history is trapped in them" said James Baldwin in his 1953 essay "Stranger in the Village". At the time he spoke of the indivisibility of black culture from collective American culture and ethos as a whole. 
+export class About extends Component {
+    constructor() {
+        super();
+        this.state = {
+            region: 'Alabama'
+        }
+    }
 
-                    A continuation of that allegory, I believe, also speaks to the importance of remaining in touch with our collective history. It, in similar duality, is a part of us all. 
-                    
-                    The American Portrait looks to reunite us with a visual piece of that history. Utilizing the Harvard Museum API, you can view a timeline of historic photos by state, ten per decade where available. 
-                    
-                    While incomplete and historically biased, these photos offer us at very least a partial window into some of the lives, events, and adolescent places that would go on to form the nation as we know it. 
-                </article>
-                <Link to="/timeline">Continue</Link>
+    chooseState = e => {
+        this.setState({ region: e.target.value });   
+    }
+
+    render() {
+        const stateSelectOptions = stateNames.map(state => {
+            return (
+                <option value={`${state}`}>{`${state}`}</option> 
+            )
+        })
+
+        return (
+            <section className="introduction">
+                <section className="intro-center">
+                    <h1>
+                        The American Portrait
+                    </h1>
+                    <article>
+                        {introText}
+                    </article>
+                    <select name="state" onChange={this.chooseState}>
+                        {stateSelectOptions}
+                    </select>
+                    <Link 
+                    to="/timeline"
+                        onClick={() => this.props.loadRegionToStore(this.state.region)}
+                    >Continue</Link>
+                </section>
             </section>
-        </section>
-    )
+        )
+    }
 }
 
-export default About;
+export const mapDispatchToProps = dispatch => ({
+    loadRegionToStore: (region) => { dispatch(loadRegion(region)) },
+});
+
+export default connect(null, mapDispatchToProps)(About)

@@ -1,6 +1,6 @@
-export const loadRegions = (regions) => ({
-    type: 'LOAD_REGIONS',
-    regions
+export const loadRegion = (region) => ({
+    type: 'LOAD_REGION',
+    region
 })
 
 export const loadCollection = (collection) => ({

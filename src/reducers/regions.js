@@ -1,7 +1,7 @@
-export const regionsReducer = (state = [], action) => {
+export const regionReducer = (state = [], action) => {
     switch (action.type) {
-        case 'LOAD_REGIONS':
-            return action.regions;
+        case 'LOAD_REGION':
+            return action.region;
         default:
             return state;
     }

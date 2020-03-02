@@ -1,10 +1,10 @@
 import { collectionsReducer } from './collections';
-import { regionsReducer } from './regions';
+import { regionReducer } from './region';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
     collections: collectionsReducer,
-    regions: regionsReducer
+    region: regionReducer
 })
 
 export default rootReducer;

@@ -11,6 +11,9 @@ const Loading = () => {
                 <h2>
                     Lyndon B. Johnson
                 </h2>
+                <h3>
+                    Loading Data...
+                </h3>
             </section>
         </section>
     )

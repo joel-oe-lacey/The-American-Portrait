@@ -1,70 +1,26 @@
-export class ArtPiece {
-    primaryimageurl;
-    title;
-    objectid;
-    description;
-    century;
-    dated;
-    culture;
-    classification;
-    technique;
-    medium;
-    colors;
-    creditline;
-    labeltext;
-
-    constructor(rawArtData) {
-        Object.assign(this, rawArtData);
-    }
-};
-
 export const restructureArtPiece = (rawArtData) => {
     const {
         title,
-        titles,
         objectid,
-        description,
-        provenance,
-        commentary,
-        labeltext,
-        classification,
         creditline,
         century,
-        culture,
-        medium,
-        videos,
-        datebegin,
+        technique,
         dateend,
         dated,
-        period,
-        technique,
-        colors,
-        primaryimageurl,
-        images,
+        people,
+        primaryimageurl
     } = rawArtData;
 
     return {
         title,
-        titles,
         objectid,
-        description,
-        provenance,
-        commentary,
-        labeltext,
-        classification,
         creditline,
         century,
-        culture,
-        medium,
-        videos,
-        datebegin,
+        technique,
         dateend,
         dated,
-        period,
-        technique,
-        colors,
-        primaryimageurl,
-        images
+        people,
+        primaryimageurl
     }
 }
 
@@ -85,13 +41,13 @@ export const bucketArtByDate = (allArt) => {
                 }
                 break;
             case (date <= 1850):
-                if (bucketedArt.eighteenFiftys.length < 10) {
-                    bucketedArt.eighteenFiftys.push(piece)
+                if (bucketedArt.toEighteenFiftys.length < 10) {
+                    bucketedArt.toEighteenFiftys.push(piece)
                 }
                 break;
             case (date <= 1880):
-                if (bucketedArt.eighteenEighty.length < 10) {
-                    bucketedArt.eighteenEighty.push(piece)
+                if (bucketedArt.toEighteenEighty.length < 10) {
+                    bucketedArt.toEighteenEighty.push(piece)
                 }
                 break;
             case (date <= 1900):

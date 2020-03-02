@@ -1,18 +1,25 @@
 import React from 'react';
 import './Invalid.scss';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Invalid = () => {
+const Invalid = ({ collections }) => {
+    const msg = (collections.length ? 'Page Not Found.' : 'Insufficient historical record, please try another state.')
+
     return (
         <section className="error">
             <section className="error-center">
                 <h1>
-                    Page Not Found, navigate back to the timeline below:
+                    {msg}
                 </h1>
-                <Link to="/timeline">Timeline</Link>
+                <Link to="/">Home</Link>
             </section>
         </section>
     )
 }
 
-export default Invalid;
+export const mapStateToProps = state => ({
+    collections: state.collections,
+});
+
+export default connect(mapStateToProps)(Invalid)

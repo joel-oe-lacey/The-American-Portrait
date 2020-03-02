@@ -6,6 +6,8 @@ import { apiCall } from '../../utils/fetchCalls'
 //for testing purposes, turn all of these functions into mock/jest functions
 jest.mock('../apiCalls.js')
 
+//for app just testing snapshot, or testing routes? 
+
 describe('App', () => {
   beforeEach(() => {
 

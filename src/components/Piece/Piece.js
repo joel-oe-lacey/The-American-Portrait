@@ -2,7 +2,7 @@ import React from 'react';
 import './Piece.scss';
 import { Link } from 'react-router-dom';
 
-const Piece = ({ 
+export const Piece = ({ 
         title,
         objectid,
         creditline,

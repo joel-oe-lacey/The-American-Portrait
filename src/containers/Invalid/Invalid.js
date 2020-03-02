@@ -3,7 +3,7 @@ import './Invalid.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Invalid = ({ collections }) => {
+export const Invalid = ({ collections }) => {
     const msg = (collections.length ? 'Page Not Found.' : 'Insufficient historical record, please try another state.')
 
     return (

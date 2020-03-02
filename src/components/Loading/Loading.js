@@ -2,7 +2,7 @@ import React from 'react';
 import './Loading.scss';
 import { Link } from 'react-router-dom';
 
-const Loading = () => {
+export const Loading = () => {
     return (
         <section className="alert">
             <section className="alert-center">

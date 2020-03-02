@@ -1,5 +1,5 @@
 import React from 'react';
-import Invalid from './Invalid';
+import { Invalid } from './Invalid';
 import { shallow } from 'enzyme'
 
 describe('Invalid Path', () => {

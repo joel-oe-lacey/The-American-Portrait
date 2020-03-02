@@ -36,9 +36,9 @@ export class Timeline extends Component {
         //perhaps make below a component
         const positionIndicator = collection.map((item, mapIndex) => {
             if(i === mapIndex) {
-                return <h4 className="position-active">.</h4>
+                return <h4 key={mapIndex} className="position-active">.</h4>
             }
-            return <h4 className="position-inactive">.</h4>
+            return <h4 key={mapIndex}className="position-inactive">.</h4>
         })
 
         if (!collection.length) {

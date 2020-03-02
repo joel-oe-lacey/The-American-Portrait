@@ -22,7 +22,6 @@ export class App extends Component {
     //impliment base query here, future queries will build dynamically
     const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&hasimage=1&place=2028429&classification=17&culture=American&size=100&sort=dateend&sortorder=desc')
     const rawCollectionResp = await collection.json();
-    console.log(rawCollectionResp)
     const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
       if (item.primaryimageurl && item.dateend) {
         restrCollection.push(restructureArtPiece(item))

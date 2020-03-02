@@ -61,11 +61,11 @@ export class Timeline extends Component {
                 {positionIndicator}
             </section>
             <section className="carousel-timeline">
-                    <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>
+                    {(i !== 0) && <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>}
                     <h2 className="timeline-prev">{i ? collection[i-1].dateend : ''}</h2>
         <h1 className="timeline-curr">{collection[i].dateend}</h1>
                     <h2 className="timeline-next">{i === endIndex ? '' : collection[i + 1].dateend}</h2>
-                    <button className='carousel-arrow-right' onClick={() => this.changePiece('right')}>→</button>
+                    {(i !== endIndex) && <button className='carousel-arrow-right' onClick={() => this.changePiece('right')}>→</button>}
             </section>
         </section>
     )}

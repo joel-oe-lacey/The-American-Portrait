@@ -73,7 +73,7 @@ export const bucketArtByDate = (allArt) => {
         return Object.keys(bucketedCollection).reduce((flatColl, dateKey) => {
             flatColl = flatColl.concat(bucketedCollection[dateKey])
             return flatColl;
-        }, [])
+        }, []).sort((a, b) => a.dateend - b.dateend)
     }
 
     const bucketedCollection = allArt.reduce((bucketedArt, piece) => {

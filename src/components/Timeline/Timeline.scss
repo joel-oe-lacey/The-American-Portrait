@@ -2,21 +2,44 @@
     height: 100%;
     width: 100%;
 
-    display: flex;
-    flex-direction: column;
-}
-
-.carousel-disp {
-    height: 80%;
-    width: 100%;
+    background-color: #202020;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+}
+
+.carousel-disp {
+    height: 75%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-areas:
+    ". prevImg . currImg currImg currImg currImg . nextImg .";
+    align-items: center;
+    text-align: center;
+    max-height: 100%;
+    grid-template-rows: 100%;
+}
+
+.carousel-position {
+    height: 5%;
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.position-inactive {
+    font-size: 1em;
+}
+
+.position-active {
+    font-size: 1.5em;
 }
 
 .carousel-timeline {
-    height: 20%;
+    height: 10%;
     width: 100%;
 
     //might want to grid this for a more even display
@@ -29,8 +52,30 @@
 }
 
 .carousel-link {
-    height: 80%;
-    width: 40%;
+    height: 70%;
+    width: 100%;
+    grid-area: currImg;
+}
+
+.carousel-title {
+    height: 10%;
+    width: 50%;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.carousel-img-prev {
+    height: 40%;
+    width: 100%;
+    object-fit: scale-down;
+    grid-area: prevImg;
+}
+
+.carousel-img-next {
+    height: 40%;
+    width: 100%;
+    object-fit: scale-down;
+    grid-area: nextImg;
 }
 
 .carousel-img {
@@ -41,17 +86,15 @@
 
 .timeline-prev {
     grid-area: prevTime;
-    border-bottom: 1px solid black;
 }
 
 .timeline-next {
     grid-area: nextTime;
-    border-bottom: 1px solid black;
 }
 
 .timeline-curr {
     grid-area: currTime;
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 .carousel-arrow-left {

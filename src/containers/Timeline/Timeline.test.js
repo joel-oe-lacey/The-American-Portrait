@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Timeline } from './Timeline';
+import { Timeline, mapStateToProps } from './Timeline';
 import { mockCollectionPrimary, mockCollectionSecondary } from '../../utils/referenceData';
 //test map state to props 
 //test indexing functionality 
@@ -34,4 +34,18 @@ describe('Timeline', () => {
 
         expect(wrapper.state('i')).toEqual(1);
     });
+
+    describe('mapStateToProps', () => {
+        it('should return an array of collection objects as a prop', () => {
+            const mockState = {
+                region: 'Colorado',
+                collections: [mockCollectionPrimary, mockCollectionSecondary],
+            }
+            const expected = {
+                collection: [mockCollectionPrimary, mockCollectionSecondary]
+            }
+            const mappedProps = mapStateToProps(mockState);
+            expect(mappedProps).toEqual(expected)
+        })
+    })
 });

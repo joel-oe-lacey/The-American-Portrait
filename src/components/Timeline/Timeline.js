@@ -3,12 +3,6 @@ import './Timeline.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-//conditionally render forward or back based on length 
-//pieces array come in as props
-//deconstruct to display certain info 
-
-//link to art piece on 
-
 export class Timeline extends Component {
     constructor({ collection }) {
         super()
@@ -39,6 +33,13 @@ export class Timeline extends Component {
         const { collection } = this.props;
         let endIndex = collection.length - 1;
         //abstract index checking into another function to reduce redundancy 
+        //perhaps make below a component
+        const positionIndicator = collection.map((item, mapIndex) => {
+            if(i === mapIndex) {
+                return <h4 className="position-active">.</h4>
+            }
+            return <h4 className="position-inactive">.</h4>
+        })
 
         return (
         <section className="carousel">
@@ -56,11 +57,14 @@ export class Timeline extends Component {
                         alt={collection[i + 1].description} />}
             </section>
             <h1 className="carousel-title">{collection[i].title}</h1>
+            <section className="carousel-position">
+                {positionIndicator}
+            </section>
             <section className="carousel-timeline">
                     <button className='carousel-arrow-left' onClick={() => this.changePiece('left')}>←</button>
-                    <h2 className="timeline-prev">{i ? collection[i-1].dateend : collection[i].dateend}</h2>
+                    <h2 className="timeline-prev">{i ? collection[i-1].dateend : ''}</h2>
         <h1 className="timeline-curr">{collection[i].dateend}</h1>
-                    <h2 className="timeline-next">{i === endIndex ? collection[i].dateend : collection[i + 1].dateend}</h2>
+                    <h2 className="timeline-next">{i === endIndex ? '' : collection[i + 1].dateend}</h2>
                     <button className='carousel-arrow-right' onClick={() => this.changePiece('right')}>→</button>
             </section>
         </section>

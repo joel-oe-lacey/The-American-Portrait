@@ -11,12 +11,22 @@ import { loadCollection, loadSubsqCollection } from '../../actions';
 import { Route, Switch } from 'react-router-dom';
 
 export class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      fetchComplete: false
+    }
+  }
+
   retrieveInitialCollection = async () => {
     //impliment base query here, future queries will build dynamically
     const collection = await apiCall('https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&hasimage=1&place=2028429&classification=17&culture=American&size=100&sort=dateend&sortorder=desc')
     const rawCollectionResp = await collection.json();
+    console.log(rawCollectionResp)
     const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
-      restrCollection.push(restructureArtPiece(item))
+      if (item.primaryimageurl && item.dateend) {
+        restrCollection.push(restructureArtPiece(item))
+      }
       return restrCollection;
     }, [])
     this.props.loadCollectionToStore(structuredCollectionData)
@@ -25,6 +35,7 @@ export class App extends Component {
     } else {
       const bucketedCollection = bucketArtByDate(structuredCollectionData);
       this.props.loadCollectionToStore(bucketedCollection);
+      this.setState({fetchComplete: true})
     }
   }
 
@@ -32,7 +43,9 @@ export class App extends Component {
     const collection = await apiCall(`${prevCollection.info.next}`)
     const rawCollectionResp = await collection.json();
     const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
-      restrCollection.push(restructureArtPiece(item))
+      if (item.primaryimageurl && item.dateend) {
+        restrCollection.push(restructureArtPiece(item))
+      }
       return restrCollection;
     }, []);
     this.props.loadSubsqCollectionToStore(structuredCollectionData);
@@ -42,6 +55,7 @@ export class App extends Component {
       const finalCollection = this.props.collections;
       const bucketedCollection = bucketArtByDate(finalCollection);
       this.props.loadCollectionToStore(bucketedCollection);
+      this.setState({ fetchComplete: true })
     }
   }
 
@@ -53,19 +67,21 @@ export class App extends Component {
 
   render() {
     const collection = this.props.collections;
+    const fetchComplete = this.state.fetchComplete;
+
     return (
       <div className="App">
-        {!collection.length && <Loading />}
+        {!fetchComplete && <Loading />}
         <Route exact path="/" render={() => {
           return (
-            collection.length && <Timeline />
+            fetchComplete && <Timeline />
         )}} />
         <Route exact path='/piece/:id' render={({ match }) => {
           const artPiece = collection.find(piece => piece.objectid === parseInt(match.params.id))
           return (
             <section className="App">
-              {!collection.length && <Loading />}
-              {collection.length && <Piece {...artPiece} />}
+              {!fetchComplete && <Loading />}
+              {fetchComplete && <Piece {...artPiece} />}
             </section>
           )
         }} />

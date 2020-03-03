@@ -2,6 +2,10 @@
 The American Portrait is a timeline visualization tool for historical photos, grouped by state. 
 Designed to allow users to engage more closely with the history of their state, it utilizes the Harvard Art Museum API to comb through a vast historical photograph archive. 
 
+#### Screenshots 
+![Timeline](./public/screenshots/Timeline.png)
+![Piece](./public/screenshots/Piece.png)
+
 #### Setup
 To run this project clone down this repo and in the root directory run "npm install".
 Once that is complete, run "npm start". 
@@ -24,7 +28,3 @@ This was achieved through several layers of deconstruction, flattening, bucketin
 
 #### Issues 
 There are several enhancements and refactors still underway for this project. Those can be viewed under Issues.
-
-#### Screenshots 
-![Timeline](./public/screenshots/Timeline.png)
-![Piece](./public/screenshots/Piece.png)

@@ -20,7 +20,7 @@
     ". prevImg . currImg currImg currImg currImg . nextImg .";
     align-items: center;
     text-align: center;
-    max-height: 100%;
+    max-height: 75%;
     grid-template-rows: 100%;
 }
 
@@ -51,6 +51,7 @@
     ". left . prevTime currTime currTime nextTime . right .";
     align-items: center;
     text-align: center;
+    margin: 1%;
 
     button {
         background: transparent;
@@ -65,6 +66,7 @@
     height: 70%;
     width: 100%;
     grid-area: currImg;
+    object-fit: scale-down;
 }
 
 .carousel-title {
@@ -94,7 +96,7 @@
 .carousel-img {
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: scale-down;
 }
 
 .timeline-prev {

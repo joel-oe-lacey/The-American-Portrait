@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Piece should match a snapshot as expected 1`] = `
+<section
+  className="piece-cont"
+  key="354191"
+>
+  <img
+    alt="House and [blue] Car, Near Akron, Alabama"
+    className="piece-img"
+    src="https://nrs.harvard.edu/urn-3:HUAM:761794"
+  />
+  <article
+    className="piece-desc"
+  >
+    <span
+      className="piece-grouping"
+    >
+      <header
+        className="desc-header"
+      >
+        <h1>
+          House and [blue] Car, Near Akron, Alabama
+        </h1>
+        <h3>
+          Dated: 1978, printed 1991
+        </h3>
+      </header>
+      <section
+        className="return-cont"
+      >
+        <Link
+          className="return-btn"
+          to="/timeline"
+        >
+          X
+        </Link>
+      </section>
+    </span>
+    <main
+      className="desc-main"
+    >
+      <h4>
+        Artist: William Christenberry
+      </h4>
+      <h4>
+        born 1936
+      </h4>
+      <h4>
+        Born: Tascaloosa, Alabama
+      </h4>
+      <h4>
+        Died: null
+      </h4>
+    </main>
+    <footer
+      className="desc-footer"
+    >
+      <h4>
+        20th century
+      </h4>
+      <h4>
+        Technique: Dye transfer print
+      </h4>
+      <h3>
+        Harvard Art Museums/Fogg Museum, Fund for the Acquisition of Photographs
+      </h3>
+    </footer>
+  </article>
+</section>
+`;

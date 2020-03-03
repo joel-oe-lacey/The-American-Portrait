@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { apiCall } from '../../utils/fetchCalls';
 import { connect } from 'react-redux';
-import { restructureArtPiece, bucketArtByDate } from '../../utils/helpers';
+import { bucketArtByDate, recompileCollection, checkRecordDataAvailability } from '../../utils/helpers';
 import { loadCollection, loadSubsqCollection } from '../../actions';
-import Loading from '../Loading/Loading';
+import Loading from '../../components/Loading/Loading';
 import { Redirect } from 'react-router-dom';
 
 export class Region extends Component {
@@ -14,24 +14,25 @@ export class Region extends Component {
         }
     }
 
-    retrieveInitialCollection = async () => {
+    retrieveRegionCode = async () => {
         const region = await apiCall(`https://api.harvardartmuseums.org/place?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&size=100&q=name:${this.props.region}`)
         const regionResp = await region.json();
-        const regionID = regionResp.records.length ? regionResp.records[0].id : 0;
+        return regionResp.records.length ? regionResp.records[0].id : 0;
+    }
+
+    retrieveInitialCollection = async () => {
+        const regionID = await this.retrieveRegionCode();
         const collection = await apiCall(`https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&hasimage=1&place=${regionID}&classification=17&culture=American&size=100&sort=dateend&sortorder=desc`)
         const rawCollectionResp = await collection.json();
-        const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
-            if (item.primaryimageurl && item.dateend) {
-                restrCollection.push(restructureArtPiece(item))
-            }
-            return restrCollection;
-        }, [])
-        this.props.loadCollectionToStore(structuredCollectionData)
+        const validCollectionData = checkRecordDataAvailability(rawCollectionResp);
+        this.props.loadCollectionToStore(validCollectionData)
         if (rawCollectionResp.info.pages > 1) {
+            //pass through whole collection response for pagination step through
             this.retrieveSubseqCollections(rawCollectionResp)
         } else {
-            const bucketedCollection = bucketArtByDate(structuredCollectionData);
-            this.props.loadCollectionToStore(bucketedCollection);
+            const bucketedCollection = bucketArtByDate(validCollectionData);
+            const recompileBucket = recompileCollection(bucketedCollection);
+            this.props.loadCollectionToStore(recompileBucket);
             this.setState({ fetchComplete: true })
         }
     }
@@ -39,19 +40,15 @@ export class Region extends Component {
     retrieveSubseqCollections = async (prevCollection) => {
         const collection = await apiCall(`${prevCollection.info.next}`)
         const rawCollectionResp = await collection.json();
-        const structuredCollectionData = rawCollectionResp.records.reduce((restrCollection, item) => {
-            if (item.primaryimageurl && item.dateend) {
-                restrCollection.push(restructureArtPiece(item))
-            }
-            return restrCollection;
-        }, []);
-        this.props.loadSubsqCollectionToStore(structuredCollectionData);
+        const validCollectionData = checkRecordDataAvailability(rawCollectionResp);
+        this.props.loadSubsqCollectionToStore(validCollectionData);
         if (rawCollectionResp.info.page !== rawCollectionResp.info.pages) {
             this.retrieveSubseqCollections(rawCollectionResp)
         } else {
             const finalCollection = this.props.collections;
             const bucketedCollection = bucketArtByDate(finalCollection);
-            this.props.loadCollectionToStore(bucketedCollection);
+            const recompileBucket = recompileCollection(bucketedCollection);
+            this.props.loadCollectionToStore(recompileBucket);
             this.setState({ fetchComplete: true })
         }
     }

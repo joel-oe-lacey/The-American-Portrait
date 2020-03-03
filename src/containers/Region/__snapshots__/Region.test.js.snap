@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Region should match a snapshot as expected 1`] = `<Loading />`;

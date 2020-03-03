@@ -4,10 +4,10 @@ import Piece from '../../components/Piece/Piece';
 import Loading from '../../components/Loading/Loading';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import Timeline from '../../components/Timeline/Timeline';
-import About from '../../components/About/About';
-import Invalid from '../../components/Invalid/Invalid';
-import Region from '../../components/Region/Region';
+import Timeline from '../Timeline/Timeline';
+import About from '../About/About';
+import Invalid from '../Invalid/Invalid';
+import Region from '../Region/Region';
 
 export class App extends Component {
   render() {

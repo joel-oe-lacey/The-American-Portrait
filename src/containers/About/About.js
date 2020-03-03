@@ -18,14 +18,13 @@ export class About extends Component {
     }
 
     render() {
-        const stateSelectOptions = stateNames.map(state => {
+        const stateSelectOptions = stateNames.map((state, i) => {
             return (
-                <option value={`${state}`}>{`${state}`}</option> 
+                <option key={i} value={`${state}`}>{`${state}`}</option> 
             )
         })
 
-        const introDisplay = introText.map(paragraph => <p>{`${paragraph}`}</p>)
-
+        const introDisplay = introText.map((paragraph,i) => <p key={i}>{`${paragraph}`}</p>)
         return (
             <section className="introduction">
                 <section className="intro-center">
@@ -38,8 +37,9 @@ export class About extends Component {
                     <select 
                         name="state" 
                         onChange={this.chooseState}
-                        className="intro-selection">
-                        <option value="" disabled selected>Please choose a state.</option>
+                        className="intro-selection"
+                        defaultValue="">
+                        <option value="" disabled>Please choose a state.</option>
                         {stateSelectOptions}
                     </select>
                     <Link 

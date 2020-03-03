@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Timeline.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Invalid from '../../components/Invalid/Invalid';
+import Invalid from '../Invalid/Invalid';
 export class Timeline extends Component {
     constructor({ collection }) {
         super()
@@ -36,9 +36,9 @@ export class Timeline extends Component {
         //perhaps make below a component
         const positionIndicator = collection.map((item, mapIndex) => {
             if(i === mapIndex) {
-                return <h4 className="position-active">.</h4>
+                return <h4 key={mapIndex} className="position-active">.</h4>
             }
-            return <h4 className="position-inactive">.</h4>
+            return <h4 key={mapIndex}className="position-inactive">.</h4>
         })
 
         if (!collection.length) {

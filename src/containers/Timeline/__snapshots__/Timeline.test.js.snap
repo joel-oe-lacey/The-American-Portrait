@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline Should equal snapshot 1`] = `
+<section
+  className="carousel"
+>
+  <section
+    className="carousel-disp"
+  >
+    <Link
+      className="carousel-link"
+      to="piece/354191"
+    >
+      <img
+        className="carousel-img"
+        src="https://nrs.harvard.edu/urn-3:HUAM:761794"
+      />
+    </Link>
+    <img
+      className="carousel-img-next"
+      src="https://nrs.harvard.edu/urn-3:HUAM:761793"
+    />
+  </section>
+  <h1
+    className="carousel-title"
+  >
+    House and [blue] Car, Near Akron, Alabama
+  </h1>
+  <section
+    className="carousel-position"
+  >
+    <h4
+      className="position-active"
+      key="0"
+    >
+      .
+    </h4>
+    <h4
+      className="position-inactive"
+      key="1"
+    >
+      .
+    </h4>
+  </section>
+  <section
+    className="carousel-timeline"
+  >
+    <span
+      className="timeline-curr"
+    >
+      <h1>
+        1978
+      </h1>
+      <h2>
+        Current
+      </h2>
+    </span>
+    <span
+      className="timeline-next"
+    >
+      <h2>
+        1972
+      </h2>
+      <h2>
+        Next
+      </h2>
+    </span>
+    <button
+      className="carousel-arrow-right"
+      onClick={[Function]}
+    >
+      Forwards
+    </button>
+  </section>
+</section>
+`;

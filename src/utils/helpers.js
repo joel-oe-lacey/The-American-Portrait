@@ -24,15 +24,24 @@ export const restructureArtPiece = (rawArtData) => {
     }
 }
 
-export const bucketArtByDate = (allArt) => {
-    const recompileCollection = (bucketedCollection) => {
-        return Object.keys(bucketedCollection).reduce((flatColl, dateKey) => {
-            flatColl = flatColl.concat(bucketedCollection[dateKey])
-            return flatColl;
-        }, []).sort((a, b) => a.dateend - b.dateend)
-    }
+export const checkRecordDataAvailability = (dataCollection) => {
+    return dataCollection.records.reduce((restrCollection, item) => {
+        if (item.primaryimageurl && item.dateend) {
+            restrCollection.push(restructureArtPiece(item))
+        }
+        return restrCollection;
+    }, [])
+}
 
-    const bucketedCollection = allArt.reduce((bucketedArt, piece) => {
+export const recompileCollection = (bucketedCollection) => {
+    return Object.keys(bucketedCollection).reduce((flatColl, dateKey) => {
+        flatColl = flatColl.concat(bucketedCollection[dateKey])
+        return flatColl;
+    }, []).sort((a, b) => a.dateend - b.dateend)
+}
+
+export const bucketArtByDate = (allArt) => {
+    return allArt.reduce((bucketedArt, piece) => {
         const date = piece.dateend;
         switch(true) {
             case (date < 1800): 
@@ -102,6 +111,6 @@ export const bucketArtByDate = (allArt) => {
         "toTwentyTwenties": [],
     })
 
-    return recompileCollection(bucketedCollection);
+    // return recompileCollection(bucketedCollection);
 }
 

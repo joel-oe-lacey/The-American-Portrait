@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import './About.scss';
 import { Link } from 'react-router-dom';
-import { introText, stateNames } from '../../utils/referenceData';
+import { introText, stateMap } from '../../utils/referenceData';
 import { loadRegion } from '../../actions';
 import { connect } from 'react-redux';
 
@@ -18,7 +18,7 @@ export class About extends Component {
     }
 
     render() {
-        const stateSelectOptions = stateNames.map((state, i) => {
+        const stateSelectOptions = Object.keys(stateMap).map((state, i) => {
             return (
                 <option key={i} value={`${state}`}>{`${state}`}</option> 
             )

@@ -5,6 +5,8 @@ import { bucketArtByDate, recompileCollection, checkRecordDataAvailability } fro
 import { loadCollection, loadSubsqCollection } from '../../actions';
 import Loading from '../../components/Loading/Loading';
 import { Redirect } from 'react-router-dom';
+import { stateMap } from '../../utils/referenceData';
+
 
 export class Region extends Component {
     constructor() {
@@ -14,14 +16,8 @@ export class Region extends Component {
         }
     }
 
-    retrieveRegionCode = async () => {
-        const region = await apiCall(`https://api.harvardartmuseums.org/place?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&size=100&q=name:${this.props.region}`)
-        const regionResp = await region.json();
-        return regionResp.records.length ? regionResp.records[0].id : 0;
-    }
-
     retrieveInitialCollection = async () => {
-        const regionID = await this.retrieveRegionCode();
+        const regionID = stateMap[this.props.region];
         const collection = await apiCall(`https://api.harvardartmuseums.org/object?apikey=b59b0050-58c4-11ea-b831-f76084e9f972&hasimage=1&place=${regionID}&classification=17&culture=American&size=100&sort=dateend&sortorder=desc`)
         const rawCollectionResp = await collection.json();
         const validCollectionData = checkRecordDataAvailability(rawCollectionResp);

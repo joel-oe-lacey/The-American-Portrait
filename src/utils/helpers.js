@@ -110,7 +110,5 @@ export const bucketArtByDate = (allArt) => {
         "toTwoThousands": [],
         "toTwentyTwenties": [],
     })
-
-    // return recompileCollection(bucketedCollection);
 }
 

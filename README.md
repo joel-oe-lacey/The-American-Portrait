@@ -2,11 +2,16 @@
 The American Portrait is a timeline visualization tool for historical photos, grouped by state. 
 Designed to allow users to engage more closely with the history of their state, it utilizes the Harvard Art Museum API to comb through a vast historical photograph archive. 
 
+#### Live Site
+https://the-american-portrait.herokuapp.com/
+
+To note it might take a moment to spin up the heroku instance it it hasn't been recently accessed.
+
 #### Screenshots 
 ![Timeline](./public/screenshots/Timeline.png)
 ![Piece](./public/screenshots/Piece.png)
 
-#### Setup
+#### Local Setup
 To run this project clone down this repo and in the root directory run "npm install".
 Once that is complete, run "npm start". 
 This runs the app in the development mode.

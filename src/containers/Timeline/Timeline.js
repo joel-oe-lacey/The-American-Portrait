@@ -46,6 +46,9 @@ export class Timeline extends Component {
         } else {
             return (
             <section className="carousel">
+                <Link to={`/`} className='return' >
+                    Home
+                </Link>
                 <section className="carousel-disp">
                         {(i !== 0) && <img className='carousel-img-prev'
                             src={collection[i-1].primaryimageurl}

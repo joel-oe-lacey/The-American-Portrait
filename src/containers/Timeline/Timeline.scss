@@ -127,3 +127,13 @@
 .carousel-arrow-right {
     grid-area: right;
 }
+
+.return {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 2%;
+    text-decoration: none;
+    color: white;
+    font-size: 1.4rem;
+}
